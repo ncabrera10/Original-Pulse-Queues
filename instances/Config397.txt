@@ -1,0 +1,6 @@
+DataFile:USA-road-CTR.txt
+NumberOfArcs:34292496
+NumberOfNodes:14081816
+TimeConstraint:12105269
+StartNode:1
+EndNode:14081816

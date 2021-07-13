@@ -1,0 +1,6 @@
+DataFile:USA-road-BAY.txt
+NumberOfArcs:800172
+NumberOfNodes:321270
+TimeConstraint:1239199
+StartNode:1
+EndNode:160635

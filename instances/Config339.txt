@@ -1,0 +1,6 @@
+DataFile:USA-road-W.txt
+NumberOfArcs:15248146
+NumberOfNodes:6262104
+TimeConstraint:18459456
+StartNode:1
+EndNode:277351

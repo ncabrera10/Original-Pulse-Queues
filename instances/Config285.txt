@@ -1,0 +1,6 @@
+DataFile:USA-road-E.txt
+NumberOfArcs:8778114
+NumberOfNodes:3598623
+TimeConstraint:336490
+StartNode:1
+EndNode:21

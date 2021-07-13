@@ -1,0 +1,6 @@
+DataFile:USA-road-LKS.txt
+NumberOfArcs:6885658
+NumberOfNodes:2758119
+TimeConstraint:3187941
+StartNode:1
+EndNode:2758119

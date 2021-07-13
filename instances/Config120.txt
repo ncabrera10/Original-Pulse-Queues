@@ -1,0 +1,6 @@
+DataFile:USA-road-COL.txt
+NumberOfArcs:1057066
+NumberOfNodes:435666
+TimeConstraint:9330672
+StartNode:1
+EndNode:435666
