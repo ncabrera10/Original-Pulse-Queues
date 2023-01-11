@@ -2,12 +2,8 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import model.PendingPulse;
 import dataStructures.DataHandler;
 import dataStructures.DukqstraDist;
 import dataStructures.DukqstraTime;
@@ -122,10 +118,10 @@ public class PulseAlgorithm {
 		 */
 		InitialPrimalBound =network.getVertexByID(dataA.Source-1).getMaxDist();
 		network.setPrimalBound(InitialPrimalBound);
-		network.TimeStar = network.getVertexByID(dataA.Source-1).getMinTime();
+		PulseGraph.TimeStar = network.getVertexByID(dataA.Source-1).getMinTime();
 
 		//Size of Q
-		dataA.numLabels = numLabels;
+		DataHandler.numLabels = numLabels;
 
 		//Initial weights
 		int[] initialWeights = new int[2];
@@ -225,14 +221,14 @@ public class PulseAlgorithm {
 		InitialPrimalBound =network.getVertexByID(dataA.Source-1).getMaxDist();
 		network.setDestiny(dataA.LastNode-1);
 		network.setPrimalBound(InitialPrimalBound);
-		network.TimeStar = network.getVertexByID(dataA.Source-1).getMinTime();
+		PulseGraph.TimeStar = network.getVertexByID(dataA.Source-1).getMinTime();
 
 		//Depth limit and num labels
-		dataA.numLabels = numLabels;
+		DataHandler.numLabels = numLabels;
 		/**
 		 * Acceleration strategy: Network Depth
 		 */
-		network.depth = depth;
+		PulseGraph.depth = depth;
 
 		//Initial weights
 
@@ -250,11 +246,11 @@ public class PulseAlgorithm {
 		double ITime = System.nanoTime(); 
 
 		//Check if we already have found the optimal solution
-		if(network.getVertexByID(dataA.Source-1).getMaxTime() <= network.TimeC) {
+		if(network.getVertexByID(dataA.Source-1).getMaxTime() <= PulseGraph.TimeC) {
 
 			//Set the primal bound and the time star
 			network.setPrimalBound(network.getVertexByID(dataA.Source-1).getMinDist());
-			network.TimeStar = network.getVertexByID(dataA.Source-1).getMaxTime();
+			PulseGraph.TimeStar = network.getVertexByID(dataA.Source-1).getMaxTime();
 
 		}
 
@@ -263,13 +259,13 @@ public class PulseAlgorithm {
 			network.getVertexByID(dataA.Source-1).pulseWithQueues(initialWeights,0);
 
 			//Store the number of pulses that are in the queue
-			int pendingPulses = dataA.pendingQueue.size();
+			int pendingPulses = DataHandler.pendingQueue.size();
 
 			//While we have pending pulses we must explore them
 			while(pendingPulses > 0) {
 
 				//Recovers the last pulse (and removes it):
-				PendingPulse p = dataA.pendingQueue.remove(pendingPulses-1);
+				PendingPulse p = DataHandler.pendingQueue.remove(pendingPulses-1);
 				p.setNotTreated(false);
 
 				//The pendingPulse weights:
@@ -277,12 +273,12 @@ public class PulseAlgorithm {
 				initialWeights[1] = p.getDist();
 
 				//Resumes the pulse
-				if(network.getVertexByID(p.getNodeID()).getMinDist() + initialWeights[1] < network.PrimalBound) {
+				if(network.getVertexByID(p.getNodeID()).getMinDist() + initialWeights[1] < PulseGraph.PrimalBound) {
 					network.getVertexByID(p.getNodeID()).pulseWithQueues(initialWeights,0);
 				}
 
 				//Updates the global queue size (How many are left)
-				pendingPulses = dataA.pendingQueue.size();
+				pendingPulses = DataHandler.pendingQueue.size();
 			}
 
 		}
@@ -317,6 +313,7 @@ public class PulseAlgorithm {
 
 		File testFile = new File(fileName); //Gets the information from Config.txt
 
+		@SuppressWarnings("resource")
 		BufferedReader bufRedr = new BufferedReader(new FileReader(testFile)); //BR to read the file
 
 		String actLine = null; //Active line
@@ -324,8 +321,7 @@ public class PulseAlgorithm {
 		String [] information = new String [6]; //6 lines of information in Config.txt
 
 		int rowA = 0;
-		int colA = 0;
-
+		
 		while((actLine = bufRedr.readLine()) != null && rowA < 6){	 //Reads the file Config.txt
 			String [] info = actLine.split(":");
 			information[rowA] = info[1];   //Stores the important information
@@ -373,7 +369,7 @@ public class PulseAlgorithm {
 	 * @return the final graph
 	 */
 	private static PulseGraph createGraph(DataHandler data) {
-		int numNodes = data.NumNodes;
+		int numNodes = DataHandler.NumNodes;
 		PulseGraph Gd = new PulseGraph(numNodes);
 		for (int i = 0; i < numNodes; i++) {
 			if(i!=(data.LastNode-1)){
@@ -383,7 +379,7 @@ public class PulseAlgorithm {
 		FinalVertexPulse vv = new FinalVertexPulse(data.LastNode-1);
 		Gd.addFinalVertex(vv);
 		for(int i = 0; i <data.NumArcs; i ++){
-			Gd.addWeightedEdge( Gd.getVertexByID(data.Arcs[i][0]), Gd.getVertexByID(data.Arcs[i][1]),data.Distance[i],data.Time[i], i);			
+			Gd.addWeightedEdge( Gd.getVertexByID(DataHandler.Arcs[i][0]), Gd.getVertexByID(DataHandler.Arcs[i][1]),DataHandler.Distance[i],DataHandler.Time[i], i);			
 		}
 		return Gd;
 	}

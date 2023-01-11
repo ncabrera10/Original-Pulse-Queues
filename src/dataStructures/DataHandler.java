@@ -15,13 +15,10 @@ package dataStructures;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.StringTokenizer;
 
 import model.PendingPulse;
 
@@ -65,21 +62,30 @@ public class DataHandler {
 	 */
 	private PulseGraph Gd;
 
+	/**
+	 * The network id
+	 */
 	private int networkId;
 
+	/**
+	 * Acronym: for example USA-road-NY.txt
+	 */
 	private String acro;
 
+	/**
+	 * Number of labels for dominance pruning
+	 */
 	public static int numLabels;
 
+	/**
+	 * Random numbers generator
+	 */
 	public static Random r = new Random(0);
 
 	/**
 	 * Pulse Queue
 	 */
 	public static ArrayList<PendingPulse> pendingQueue;
-
-
-
 
 	/**
 	 * Read data from an instance
@@ -96,7 +102,7 @@ public class DataHandler {
 		NumNodes = numNodes;
 		LastNode = lastNode;
 		Source = sourceNode;
-		networkId = netId;
+		setNetworkId(netId);
 		acro = acronym;
 
 		//Creates the list of arcs. A list of distances and a list of times   --- Serian independientes del sentido de la red ! 
@@ -142,8 +148,8 @@ public class DataHandler {
 	public void ReadDimacsF() throws NumberFormatException, IOException {
 		File file2 = null;
 		file2 = new File("./networks/"+acro);
-		//file2 = new File("C:/Users/nick0/OneDrive/Documentos/Universidad/BP/Networks/"+acro);
-		
+
+		@SuppressWarnings("resource")
 		BufferedReader bufRdr2 = new BufferedReader(new FileReader(file2));
 		String line2 = null;
 		int row2 = 0;
@@ -165,8 +171,8 @@ public class DataHandler {
 	public void ReadDimacsB() throws NumberFormatException, IOException {
 		File file2 = null;
 		file2 = new File("./networks/"+acro);
-		//file2 = new File("C:/Users/nick0/OneDrive/Documentos/Universidad/BP/Networks/"+acro);
-				
+		
+		@SuppressWarnings("resource")
 		BufferedReader bufRdr2 = new BufferedReader(new FileReader(file2));
 		String line2 = null;
 		int row2 = 0;
@@ -188,14 +194,13 @@ public class DataHandler {
 		int r = labels.size()-1; //der
 		int m = (int) ((l + r) / 2); //medio
 		double mVal = 0;
-		//		System.out.println("Inicia :"+labels.get(l).getSortCriteria()+"\t"+labels.get(m).getSortCriteria()+"\t"+labels.get(r).getSortCriteria());
 		if(labels.size() == 1){
 			return 0;
 		}else{
 			mVal = labels.get(m).getSortCriteria();
 		}
 		while (cond) {
-			//			 System.out.println("murio");
+
 			if (r - l > 1) {
 				if (cScore > mVal) {
 					r = m;
@@ -221,12 +226,6 @@ public class DataHandler {
 				mVal = labels.get(m).getSortCriteria();
 			} else {
 				cond = false;
-
-				///if (p.getNodeID()==labels.get(r).getNodeID() && p.getSortCriteria() == labels.get(r).getSortCriteria() && p.getTime() == labels.get(r).getTime()){
-				//return r;
-				//}else if (p.getNodeID()==labels.get(l).getNodeID() && p.getSortCriteria() == labels.get(l).getSortCriteria()&& p.getTime() == labels.get(l).getTime()){
-				//return l;
-				//}
 
 				if (p.equals(labels.get(r))){
 					return r;
@@ -343,6 +342,16 @@ public class DataHandler {
 	 */
 	public void setLastNode(int lastNode) {
 		LastNode = lastNode;
+	}
+
+
+	public int getNetworkId() {
+		return networkId;
+	}
+
+
+	public void setNetworkId(int networkId) {
+		this.networkId = networkId;
 	}
 
 

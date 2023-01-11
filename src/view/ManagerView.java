@@ -1,6 +1,5 @@
 package view;
 
-import java.io.File;
 
 import dataStructures.PulseGraph;
 import model.PulseAlgorithm;
@@ -56,10 +55,10 @@ public class ManagerView
 		System.out.println("Instance: "+pulse.instanc);
 		System.out.println("Network: "+ pulse.networkName);
 		System.out.println("Destiny: "+pulse.destiny);
-		System.out.println("Time limit: "+pulse.network.TimeC);
-		System.out.println("Time star: "+pulse.network.TimeStar);
+		System.out.println("Time limit: "+PulseGraph.TimeC);
+		System.out.println("Time star: "+PulseGraph.TimeStar);
 		System.out.println("Initial Primal Bound: "+ pulse.InitialPrimalBound);
-		System.out.println("Final Primal Bound: "+pulse.network.PrimalBound);
+		System.out.println("Final Primal Bound: "+PulseGraph.PrimalBound);
 		System.out.println("Computational time: "+ pulse.computationalTime);
 		
 		if(pulse.forwardDirection){

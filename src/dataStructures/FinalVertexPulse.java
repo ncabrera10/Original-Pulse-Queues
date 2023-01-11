@@ -14,9 +14,6 @@
 
 package dataStructures;
 
-import java.util.ArrayList;
-
-
 /**
  * This class represents the final Vertex of the SP
  */

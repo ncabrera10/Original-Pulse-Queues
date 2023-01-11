@@ -20,10 +20,8 @@ import java.util.Set;
 import org.jgrapht.EdgeFactory;
 import org.jgrapht.Graph;
 
-import dataStructures.EdgePulse;
-import dataStructures.FinalVertexPulse;
 import dataStructures.PulseGraph;
-import dataStructures.VertexPulse;
+
 
 
 /**
@@ -334,7 +332,7 @@ public class PulseGraph  implements Graph<VertexPulse, EdgePulse> {
 	 */
 	public void SetConstraint(double timeC) {
 
-		this.TimeC=timeC;
+		PulseGraph.TimeC=timeC;
 
 	}
 	/**
@@ -343,7 +341,7 @@ public class PulseGraph  implements Graph<VertexPulse, EdgePulse> {
 	 */
 	public void setPrimalBound(int bound) {
 
-		this.PrimalBound=bound;
+		PulseGraph.PrimalBound=bound;
 
 	}
 
@@ -379,7 +377,7 @@ public class PulseGraph  implements Graph<VertexPulse, EdgePulse> {
 
 
 	public void setDestiny(int i) {
-		this.destiny = i;
+		PulseGraph.destiny = i;
 
 	}
 

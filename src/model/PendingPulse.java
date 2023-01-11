@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
-
 /**
  * This class represents the pending pulses
  */

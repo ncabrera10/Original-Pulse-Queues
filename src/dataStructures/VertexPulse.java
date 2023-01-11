@@ -15,8 +15,6 @@
 package dataStructures;
 import java.util.ArrayList;
 
-import dataStructures.DataHandler;
-import dataStructures.PulseGraph;
 import dataStructures.VertexPulse;
 import model.PendingPulse;
 

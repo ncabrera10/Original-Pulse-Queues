@@ -1,12 +1,8 @@
 package controller;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import java.io.File;
-
 import model.Manager;
 import model.PulseAlgorithm;
 import view.ManagerView;
@@ -49,11 +45,6 @@ public class Controller {
 		//Controller controller = new Controller();
 		int option = -1;
 		boolean numeroEncontrado = false;
-		boolean esSatisfactorio;
-
-		long startTime;
-		long endTime;
-		long duration;
 
 		while(!fin)
 		{
